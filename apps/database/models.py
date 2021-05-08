@@ -8,7 +8,6 @@ from config import JsonConfig
 
 
 def get_model(model):
-    print(JsonConfig.get_data('TESTING'))
     if JsonConfig.get_data('TESTING'):
         return model.test_model
     return model

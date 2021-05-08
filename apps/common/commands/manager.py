@@ -6,7 +6,7 @@ from flask_migrate import Migrate, MigrateCommand
 
 from apps.controllers.router import app
 from apps.database.session import db
-from config import Config, JsonConfig
+from config import Config
 
 migrate = Migrate(app, db)
 manager = Manager(app)
