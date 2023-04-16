@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 import unittest2
-from flask_script import Manager
-from flask_migrate import Migrate, MigrateCommand
+from flask_migrate import Migrate
 
 
 from apps.controllers.router import app
@@ -9,11 +8,9 @@ from apps.database.session import db
 from config import Config
 
 migrate = Migrate(app, db)
-manager = Manager(app)
-manager.add_command('db', MigrateCommand)
 
 
-@manager.command
+@app.cli.command('test')
 def test():
     """test code"""
     loader = unittest2.TestLoader()
@@ -28,10 +25,3 @@ def test():
     else:
         print('fail')
         exit(1)
-
-
-@manager.option('-h', '--host', dest='host', default=Config.APP_HOST)
-@manager.option('-p', '--port', dest='port', default=Config.APP_PORT)
-def runserver(host, port):
-    """run flask server"""
-    app.run(host=host, port=int(port))
